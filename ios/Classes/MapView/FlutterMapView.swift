@@ -40,6 +40,12 @@ class FlutterMapView: MKMapView, UIGestureRecognizerDelegate {
         self.channel = channel
         self.options = options
         initialiseTapGestureRecognizers()
+
+        //Exclude all POIs for iOS 13.0 and above.
+        if #available(iOS 13.0, *) {
+            let poiFilter = MKPointOfInterestFilter.excludingAll
+            self.pointOfInterestFilter = poiFilter
+        }
     }
     
     var actualHeading: CLLocationDirection {
